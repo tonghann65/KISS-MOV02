@@ -1,62 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C5W716M650"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-C5W716M650');
-</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Video Playlist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoFlie - Trending Live Cameras</title>
+
+<meta name="description" content="Watch trending public live cameras from around the world. Explore city, beach, street and travel live streams.">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#111;color:#fff;display:flex;height:100vh;overflow:hidden}
-.sidebar{width:300px;background:#1b1b1b;overflow:auto}
-.item{padding:12px;border-bottom:1px solid #333;cursor:pointer}
-.item.active{background:#ff0033}
-.main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
-video{width:100%;max-width:900px;max-height:75vh;background:#000;border-radius:10px}
-.controls{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
-button{padding:10px 16px;background:#ff0033;color:#fff;border:0;border-radius:8px;cursor:pointer;font-size:28px;font-weight:bold;padding:15px 30px}
-.popup{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center}
-.popup-box{background:#222;padding:25px;border-radius:12px;text-align:center}
-@media(max-width:768px){body{flex-direction:column}.sidebar{width:100%;height:220px}}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#111;
+color:white;
+}
+
+header{
+background:#000;
+padding:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#00d4ff;
+}
+
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+}
+
+.hero{
+padding:70px 20px;
+text-align:center;
+background:#181818;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+font-size:18px;
+color:#bbb;
+}
+
+.button{
+display:inline-block;
+margin-top:25px;
+padding:15px 35px;
+background:#00d4ff;
+color:black;
+text-decoration:none;
+border-radius:6px;
+font-weight:bold;
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:20px;
+
+padding:40px;
+
+}
+
+.card{
+
+background:#222;
+
+border-radius:10px;
+
+overflow:hidden;
+
+}
+
+.card img{
+
+width:100%;
+
+height:200px;
+
+object-fit:cover;
+
+}
+
+.card h3{
+
+padding:10px;
+
+margin:0;
+
+}
+
+.card p{
+
+padding:0 10px 15px;
+
+color:#aaa;
+
+}
+
+.about{
+
+padding:50px;
+
+line-height:1.8;
+
+}
+
+footer{
+
+background:#000;
+
+padding:25px;
+
+text-align:center;
+
+}
+
+footer a{
+
+color:#ccc;
+
+margin:10px;
+
+text-decoration:none;
+
+}
+
 </style>
+
 </head>
+
 <body>
-<div class="popup" id="popup"><div class="popup-box"><h2>🎬 환영합니다</h2><p>시작하려면 닫기를 클릭하세요..</p><button onclick="closePopup()">닫기</button></div></div>
-<div class="sidebar" id="playlist"></div>
-<div class="main">
-<video id="player" controls autoplay muted playsinline></video>
-<video id="player" controls></video>
-<div class="controls">
-<button onclick="prevVideo()">⏮ Prev</button>
-<button onclick="nextVideo()">Next ⏭</button>
-<button onclick="toggleShuffle()">🔀 Shuffle</button>
-<button onclick="toggleRepeat()">🔁 Repeat</button>
-</div></div>
-<script>
-const videos=[
-"https://cdn.videy.co/ngVHH4RJ1.mp4",
-"https://cdn.videy.co/WWKWMEBj1.mp4",
-"https://cdn.videy.co/HgK0qgDP1.mp4"
-];
-let current=0,shuffle=false,repeat=false;
-const p=document.getElementById('player'),list=document.getElementById('playlist');
-videos.forEach((v,i)=>{let d=document.createElement('div');d.className='item';d.textContent='🎬 Video '+(i+1);d.onclick=()=>loadVideo(i);list.appendChild(d);});
-// Auto play first video behind popup
-loadVideo(0);
-function loadVideo(i){current=i;p.src=videos[i];p.play();document.querySelectorAll('.item').forEach((e,n)=>e.classList.toggle('active',n===i));}
-function nextVideo(){if(repeat){loadVideo(current);return;}current=shuffle?Math.floor(Math.random()*videos.length):(current+1)%videos.length;loadVideo(current);}
-function prevVideo(){current=(current-1+videos.length)%videos.length;loadVideo(current);}
-function toggleShuffle(){shuffle=!shuffle;alert('Shuffle '+(shuffle?'ON':'OFF'));}
-function toggleRepeat(){repeat=!repeat;alert('Repeat '+(repeat?'ON':'OFF'));}
-function closePopup(){document.getElementById('popup').style.display='none';loadVideo(0);window.location.href='https://wwp.giriuhot.com/redirect-zone/be6c5cf7';}
-p.onended=nextVideo;
-</script>
-</body></html>
+
+<header>
+
+<div class="logo">GoFlie</div>
+
+<nav>
+
+<a href="/">Home</a>
+
+<a href="/about.html">About</a>
+
+<a href="/privacy.html">Privacy</a>
+
+<a href="/terms.html">Terms</a>
+
+<a href="/contact.html">Contact</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Trending Live Cameras</h1>
+
+<p>
+
+Watch publicly available live cameras from around the world.
+
+Discover popular city cameras, travel destinations,
+
+nature, beaches and more.
+
+</p>
+
+<a class="button" href="#cams">Browse Cameras</a>
+
+</section>
+
+<section id="cams" class="grid">
+
+<div class="card">
+<img src="thumbnail1.jpg">
+<h3>Seoul Street Camera</h3>
+<p>South Korea</p>
+</div>
+
+<div class="card">
+<img src="thumbnail2.jpg">
+<h3>Tokyo Station</h3>
+<p>Japan</p>
+</div>
+
+<div class="card">
+<img src="thumbnail3.jpg">
+<h3>Busan Beach</h3>
+<p>South Korea</p>
+</div>
+
+<div class="card">
+<img src="thumbnail4.jpg">
+<h3>Bangkok City</h3>
+<p>Thailand</p>
+</div>
+
+<div class="card">
+<img src="thumbnail5.jpg">
+<h3>Singapore Marina</h3>
+<p>Singapore</p>
+</div>
+
+<div class="card">
+<img src="thumbnail6.jpg">
+<h3>Hong Kong Street</h3>
+<p>Hong Kong</p>
+</div>
+
+</section>
+
+<section class="about">
+
+<h2>About GoFlie</h2>
+
+<p>
+
+GoFlie is an online directory that helps visitors discover
+
+public live camera streams from different locations around the world.
+
+Users can browse trending cameras by country,
+
+city and category.
+
+The website is designed for travel discovery,
+
+public location viewing,
+
+and entertainment purposes.
+
+Our platform is updated regularly with new listings.
+
+</p>
+
+</section>
+
+<footer>
+
+<a href="/about.html">About</a>
+
+<a href="/privacy.html">Privacy Policy</a>
+
+<a href="/terms.html">Terms</a>
+
+<a href="/contact.html">Contact</a>
+
+<a href="/dmca.html">DMCA</a>
+
+<p>© 2026 GoFlie.xyz</p>
+
+</footer>
+
+</body>
+
+</html>
