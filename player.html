@@ -1,41 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Player</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB5SVC74BX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<style>
-html,body{
-    margin:0;
-    padding:0;
-    background:#000;
-    width:100%;
-    height:100%;
-}
-
-video{
-    width:100%;
-    height:100vh;
-    object-fit:contain;
-    background:#000;
-}
-</style>
+  gtag('config', 'G-GB5SVC74BX');
+</script>>
+    <meta charset="UTF-8">
+    <title>Video Player</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+        }
+        video {
+            width: 100%;
+            height: 100vh;
+            object-fit: contain;
+            background: #000;
+        }
+    </style>
 </head>
-
 <body>
-
-<video id="player" controls autoplay playsinline></video>
+<video id="player" controls autoplay muted playsinline></video>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const video = params.get("video");
+    const params = new URLSearchParams(window.location.search);
+    const videoUrl = params.get("video");
+    const player = document.getElementById("player");
 
-if(video){
-    document.getElementById("player").src = decodeURIComponent(video);
-}else{
-    document.body.innerHTML="<h2 style='color:white;text-align:center;margin-top:40px'>No Video Found</h2>";
-}
+    if (videoUrl) {
+        player.src = videoUrl;
+        player.play().catch(error => {
+            console.log("Autoplay prevented:", error);
+        });
+    } else {
+        document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
+    }
+
+    // SmartLink នឹងលោតឡើងនៅពេលដែលអ្នកប្រើប្រាស់ចុចលើវីដេអូក្នុង App X
+    let smartLinkOpened = false;
+    player.addEventListener('click', function() {
+        if (!smartLinkOpened) {
+            smartLinkOpened = true;
+            // ជំនួស 'https://s.pemsrv.com/v1/link.php?cat=&idzone=5986808&type=8' ជាមួយ Link SmartLink របស់អ្នក
+            window.open('https://s.pemsrv.com/v1/link.php?cat=&idzone=5986808&type=8', '_blank');
+        }
+    });
 </script>
 
 </body>
