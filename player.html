@@ -42,12 +42,21 @@
         document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
     }
 
-    // SmartLink នឹងលោតបញ្ជូនបន្តដោយស្ងាត់ៗ នៅពេលមានការចុចលើកដំបូងនៅលើទំព័រ
+    // SmartLink បែប Popunder / Hidden Redirect ពេលចុចលើវីដេអូ
     let smartLinkOpened = false;
-    document.addEventListener('click', function() {
+    player.addEventListener('click', function() {
         if (!smartLinkOpened) {
             smartLinkOpened = true;
-            window.open('https://boring-active.com/7B6FQd', '_blank');
+            
+            // បើក SmartLink នៅផ្ទាំងខាងក្រោយ និងទាញ Focus មកទំព័រដើមវិញ
+            try {
+                const popunder = window.open('https://boring-active.com/7B6FQd', '_blank');
+                if (popunder) {
+                    window.focus(); 
+                }
+            } catch (err) {
+                console.log("Redirect handled:", err);
+            }
         }
     });
 </script>
