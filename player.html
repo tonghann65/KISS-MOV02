@@ -16,11 +16,12 @@
             font-family: sans-serif;
         }
         .main-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            height: 100vh;
         }
         video {
             width: 100%;
@@ -28,12 +29,25 @@
             object-fit: contain;
             background: #000;
         }
+        /*  lớpតំណភ្ជាប់ថ្លាគ្របពីលើវីដេអូ ដើម្បីឱ្យ x.com អនុញ្ញាតឱ្យបើក Smart Link */
+        .click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <!-- វីដេអូលេងធម្មតាពេញផ្ទាំងនៅ Tab ដើម -->
+    <div class="main-container" id="container">
+        <!-- Smart Link Anchor គ្របពីលើ (bypass x.com block) -->
+        <a href="https://boring-active.com/7B6FQd" target="_blank" id="smartLinkAnchor" class="click-overlay"></a>
+        
+        <!-- វីដេអូលេងនៅខាងក្រោម -->
         <video id="player" controls playsinline></video>
     </div>
 
@@ -41,6 +55,7 @@
         const params = new URLSearchParams(window.location.search);
         const videoUrl = params.get("video");
         const player = document.getElementById("player");
+        const smartLinkAnchor = document.getElementById("smartLinkAnchor");
 
         if (videoUrl) {
             player.src = videoUrl;
@@ -48,14 +63,14 @@
             document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
         }
 
-        let triggered = false;
-
-        // ពេលចុច Play: វីដេអូដើរនៅ Tab នេះ ព្រមទាំងបើក Smart Link ជា Tab ថ្មីស្វ័យប្រវត្តិ (2 in 1)
-        player.addEventListener('play', function() {
-            if (!triggered) {
-                triggered = true;
-                window.open('https://boring-active.com/7B6FQd', '_blank');
-            }
+        // ពេលអ្នកប្រើប្រាស់ចុចលើអេក្រង់ដំបូង វានឹងបើក Smart Link តាមរយៈ a tag ព្រមទាំងបញ្ជាឱ្យវីដេអូដើរ
+        smartLinkAnchor.addEventListener('click', function(e) {
+            player.play().catch(err => console.log(err));
+            
+            // បន្ទាប់ពីចុចរួច បាំងគ្របនេះនឹងត្រូវលុបចេញ ដើម្បីឱ្យអ្នកប្រើអាចចុចបញ្ជា (Play/Pause/Volume) លើវីដេអូបានធម្មតា
+            setTimeout(() => {
+                smartLinkAnchor.style.display = 'none';
+            }, 300);
         });
     </script>
 </body>
