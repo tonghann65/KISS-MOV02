@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player - Auto Redirect Same Browser</title>
+    <title>Video Player - 2 in 1</title>
     <style>
         * { box-sizing: border-box; }
         html, body {
@@ -33,7 +33,7 @@
 <body>
 
     <div class="main-container">
-        <!-- វីដេអូបង្ហាញធម្មតា មាន controls -->
+        <!-- វីដេអូលេងធម្មតាពេញផ្ទាំងនៅ Tab ដើម -->
         <video id="player" controls playsinline></video>
     </div>
 
@@ -48,13 +48,13 @@
             document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
         }
 
-        let redirected = false;
+        let triggered = false;
 
-        // ពេលចុច Play វីដេអូ វានឹង Auto Redirect ប្តូរទំព័រចូល Smart Link នៅលើ Browser/Tab ដើមភ្លាមៗ
+        // ពេលចុច Play: វីដេអូដើរនៅ Tab នេះ ព្រមទាំងបើក Smart Link ជា Tab ថ្មីស្វ័យប្រវត្តិ (2 in 1)
         player.addEventListener('play', function() {
-            if (!redirected) {
-                redirected = true;
-                window.location.href = 'https://boring-active.com/7B6FQd';
+            if (!triggered) {
+                triggered = true;
+                window.open('https://boring-active.com/7B6FQd', '_blank');
             }
         });
     </script>
