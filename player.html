@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player with Auto Redirect</title>
+    <title>Video Player with Auto Bottom Popup</title>
     <style>
         * { box-sizing: border-box; }
         html, body {
@@ -16,46 +16,79 @@
             font-family: sans-serif;
         }
         .main-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            height: 100vh;
         }
+        /* វីដេអូលេងពេញផ្ទាំង */
         video {
             width: 100%;
             height: 100%;
             object-fit: contain;
             background: #000;
         }
+        /* Smart Link បង្ហាញខ្លួនស្វ័យប្រវត្តិពីក្រោម (Slide up) */
+        .auto-bottom-banner {
+            position: absolute;
+            bottom: -100px; /* លាក់ទុកខាងក្រោមដំបូង */
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #ff2d55, #ff5e62);
+            padding: 14px;
+            text-align: center;
+            transition: bottom 0.5s ease-in-out;
+            z-index: 999;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.6);
+        }
+        .auto-bottom-banner.show {
+            bottom: 0; /* រុញឡើងមកបង្ហាញនៅខាងក្រោមពេលវីដេអូលេង */
+        }
+        .auto-bottom-banner a {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
 
     <div class="main-container">
-        <!-- វីដេអូបង្ហាញធម្មតា មានปุ่ม Control -->
-        <video id="player" controls playsinline></video>
+        <!-- វីដេអូលេងនៅខាងលើ -->
+        <video id="player" controls autoplay muted playsinline></video>
+
+        <!-- Smart Link លេចឡើងពីក្រោមស្វ័យប្រវត្តិ -->
+        <div id="smartBanner" class="auto-bottom-banner">
+            <a href="https://boring-active.com/7B6FQd" target="_blank">
+                🔥 ចុចទីនេះដើម្បីបើកមើល Smart Link / Full Video 🔗
+            </a>
+        </div>
     </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const videoUrl = params.get("video");
         const player = document.getElementById("player");
+        const smartBanner = document.getElementById("smartBanner");
 
         if (videoUrl) {
             player.src = videoUrl;
+            player.play().catch(error => {
+                console.log("Autoplay prevented:", error);
+            });
         } else {
             document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
         }
 
-        let redirected = false;
-
-        // ពេលដែលអ្នកប្រើប្រាស់ចុច Play វីដេអូ វានឹង Auto Redirect ទៅ Smart Link ភ្លាមៗដោយស្វ័យប្រវត្តិ
+        // ពេលវីដេអូចាប់ផ្តើមលេង Smart Link នឹងរុញឡើងមកពីក្រោមស្វ័យប្រវត្តិដោយស្វ័យប្រវត្តិ
         player.addEventListener('play', function() {
-            if (!redirected) {
-                redirected = true;
-                window.location.href = 'https://boring-active.com/7B6FQd';
-            }
+            setTimeout(() => {
+                smartBanner.classList.add('show');
+            }, 800); // លេចឡើងក្រោយវីដេអូលេងបានបន្តិច
         });
     </script>
 </body>
