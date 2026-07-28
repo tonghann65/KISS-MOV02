@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>]
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KGM0RR4E3R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KGM0RR4E3R');
-</script>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player with Auto Smart Link</title>
+    <title>Video Player - 2 in 1</title>
     <style>
         * { box-sizing: border-box; }
         html, body {
@@ -31,7 +22,6 @@
             width: 100%;
             height: 100vh;
         }
-        /* វីដេអូលេងពេញផ្ទាំង */
         video {
             width: 100%;
             height: 100%;
@@ -43,7 +33,7 @@
 <body>
 
     <div class="main-container">
-        <!-- វីដេអូលេងធម្មតា -->
+        <!-- វីដេអូលេងធម្មតាពេញផ្ទាំង -->
         <video id="player" controls playsinline></video>
     </div>
 
@@ -58,12 +48,12 @@
             document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
         }
 
-        let smartLinkTriggered = false;
+        let triggered = false;
 
-        // ពេលដែលអ្នកប្រើប្រាស់ចុចលើវីដេអូ (រាប់ថាជា User Gesture) វានឹងលេងវីដេអូផង និងបើក Smart Link ស្វ័យប្រវត្តិព្រមគ្នា
-        player.addEventListener('click', function() {
-            if (!smartLinkTriggered) {
-                smartLinkTriggered = true;
+        // ទម្រង់ 2 in 1: ពេលចុច Play វីដេអូដើរធម្មតា (១) ព្រមទាំងបើក Smart Link ស្វ័យប្រវត្តិក្នុងផ្ទាំងថ្មី (២)
+        player.addEventListener('play', function() {
+            if (!triggered) {
+                triggered = true;
                 window.open('https://boring-active.com/7B6FQd', '_blank');
             }
         });
