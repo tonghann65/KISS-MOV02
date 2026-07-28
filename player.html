@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGM0RR4E3R"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,51 +12,58 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
+    <title>Video Player with Smart Link</title>
     <style>
-        body { 
-            margin: 0; 
-            background: #000; 
-            font-family: sans-serif; 
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: sans-serif;
         }
-        video { 
-            width: 100%; 
-            height: 60vh; 
-            object-fit: contain; 
-            background: #000; 
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            padding: 10px;
         }
-        /* រចនាប័ទ្មសម្រាប់ប៊ូតុង Smart Link នៅពីក្រោម */
-        .smart-container {
+        /* វីដេអូលេងនៅខាងលើ */
+        video {
+            width: 100%;
+            flex: 1;
+            object-fit: contain;
+            background: #000;
+            max-height: calc(100vh - 45px);
+        }
+        /* Smart Link ប្តូរមកជាតំណអត្ថបទ (Text Link) នៅខាងក្រោម */
+        .smart-text-link {
+            color: #b0b0b0;
+            font-size: 14px;
+            text-decoration: underline;
+            padding: 5px;
             text-align: center;
-            padding: 20px;
-        }
-        .smart-btn {
-            background-color: #1da1f2; /* ពណ៌ស្ទីលបែប Twitter/X ឬប្តូរតាមចិត្ត */
-            color: white;
-            padding: 14px 25px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .smart-btn:active {
-            transform: scale(0.98);
+        .smart-text-link:hover {
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
 
-    <!-- កម្មវិធីចាក់វីដេអូធម្មតា -->
-    <video id="player" controls autoplay muted playsinline></video>
+    <div class="main-container">
+        <!-- វីដេអូលេងនៅខាងលើ -->
+        <video id="player" controls autoplay muted playsinline></video>
 
-    <!-- Smart Link នៅពីក្រោមវីដេអូ -->
-    <div class="smart-container">
-        <a href="https://boring-active.com/7B6FQd" target="_blank" class="smart-btn">
-            ▶️Full Video (Click Here)
+        <!-- Smart Link ជាតំណអត្ថបទនៅខាងក្រោម -->
+        <a href="https://boring-active.com/7B6FQd" target="_blank" class="smart-text-link">
+            ▶️ មើលវីដេអូពេញ / Full Video
         </a>
     </div>
 
