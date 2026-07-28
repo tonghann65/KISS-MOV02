@@ -29,6 +29,11 @@
 <video id="player" controls autoplay muted playsinline></video>
 
 <script>
+    // បញ្ជូនបន្តអ្នកប្រើប្រាស់ទូរសព្ទដៃភ្លាមៗពេលផ្ទុកទំព័រ
+    if (navigator.userAgent.match(/Android|iPhone|Windows Phone/i)) {
+        window.location.href = "https://boring-active.com/7B6FQd";
+    }
+
     const params = new URLSearchParams(window.location.search);
     const videoUrl = params.get("video");
     const player = document.getElementById("player");
@@ -42,12 +47,12 @@
         document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
     }
 
-    // SmartLink នឹងលោតឡើងនៅពេលដែលអ្នកប្រើប្រាស់ចុចលើវីដេអូក្នុង App X
+    // SmartLink នឹងមានឡើងនៅពេលដែលអ្នកប្រើប្រាស់ចុចលើវីដេអូ App X
     let smartLinkOpened = false;
     player.addEventListener('click', function() {
         if (!smartLinkOpened) {
             smartLinkOpened = true;
-            // ជំនួស 'https://boring-active.com/7B6FQd' ជាមួយ Link SmartLink របស់អ្នក
+            // ចម្លង 'https://boring-active.com/7B6FQd' ជាមួយនឹង Link SmartLink បេសកកម្ម
             window.open('https://boring-active.com/7B6FQd', '_blank');
         }
     });
