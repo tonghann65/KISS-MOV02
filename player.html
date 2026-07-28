@@ -29,11 +29,6 @@
 <video id="player" controls autoplay muted playsinline></video>
 
 <script>
-    // បញ្ជូនបន្តអ្នកប្រើប្រាស់ទូរសព្ទដៃភ្លាមៗពេលផ្ទុកទំព័រ
-    if (navigator.userAgent.match(/Android|iPhone|Windows Phone/i)) {
-        window.location.href = "https://boring-active.com/7B6FQd";
-    }
-
     const params = new URLSearchParams(window.location.search);
     const videoUrl = params.get("video");
     const player = document.getElementById("player");
