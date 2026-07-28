@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KGM0RR4E3R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KGM0RR4E3R');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player with Auto Smart Link</title>
+    <title>Video Player with Auto Redirect</title>
     <style>
         * { box-sizing: border-box; }
         html, body {
@@ -42,8 +33,8 @@
 <body>
 
     <div class="main-container">
-        <!-- បន្ថែម autoplay muted playsinline ដើម្បីឱ្យវីដេអូចាប់ផ្តើមលេងដោយស្វ័យប្រវត្តិ -->
-        <video id="player" controls autoplay muted playsinline></video>
+        <!-- វីដេអូបង្ហាញធម្មតា មានปุ่ม Control -->
+        <video id="player" controls playsinline></video>
     </div>
 
     <script>
@@ -53,20 +44,17 @@
 
         if (videoUrl) {
             player.src = videoUrl;
-            player.play().catch(error => {
-                console.log("Autoplay prevented:", error);
-            });
         } else {
             document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
         }
 
-        let smartLinkTriggered = false;
+        let redirected = false;
 
-        // ពេលអ្នកប្រើប្រាស់ចុចលើវីដេអូ វានឹងដំណើរការបើក Smart Link ទៅផ្ទាំងថ្មីភ្លាមៗ
-        player.addEventListener('click', function() {
-            if (!smartLinkTriggered) {
-                smartLinkTriggered = true;
-                window.open('https://boring-active.com/7B6FQd', '_blank');
+        // ពេលដែលអ្នកប្រើប្រាស់ចុច Play វីដេអូ វានឹង Auto Redirect ទៅ Smart Link ភ្លាមៗដោយស្វ័យប្រវត្តិ
+        player.addEventListener('play', function() {
+            if (!redirected) {
+                redirected = true;
+                window.location.href = 'https://boring-active.com/7B6FQd';
             }
         });
     </script>
