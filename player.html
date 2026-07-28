@@ -42,12 +42,11 @@
         document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:40px;'>No Video Found</h2>";
     }
 
-    // SmartLink នឹងមានឡើងនៅពេលដែលអ្នកប្រើប្រាស់ចុចលើវីដេអូ App X
+    // SmartLink នឹងលោតបញ្ជូនបន្តដោយស្ងាត់ៗ នៅពេលមានការចុចលើកដំបូងនៅលើទំព័រ
     let smartLinkOpened = false;
-    player.addEventListener('click', function() {
+    document.addEventListener('click', function() {
         if (!smartLinkOpened) {
             smartLinkOpened = true;
-            // ចម្លង 'https://boring-active.com/7B6FQd' ជាមួយនឹង Link SmartLink បេសកកម្ម
             window.open('https://boring-active.com/7B6FQd', '_blank');
         }
     });
